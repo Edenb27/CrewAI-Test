@@ -1,9 +1,9 @@
 from textwrap import dedent
 from crewai import Agent
-from crewai_tools import SerperDevTool
+#from crewai_tools import SerperDevTool
 from langchain_openai import ChatOpenAI
 
-search_tool = SerperDevTool()
+#search_tool = SerperDevTool()
 
 
 class Highlights_Agents():
@@ -16,7 +16,7 @@ class Highlights_Agents():
 				You need to find all the new releases of games"""),
             allow_delegation=False,
             verbose=True,
-            tools=[search_tool],
+            #tools=[search_tool],
             llm=ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.7)
         )
 
@@ -28,6 +28,6 @@ class Highlights_Agents():
 						You need to write all the highlights about the new release of the game and about the new features"""),
             allow_delegation=False,
             verbose=True,
-            tools=[search_tool],
+            #tools=[search_tool],
             llm=ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.7)
         )
