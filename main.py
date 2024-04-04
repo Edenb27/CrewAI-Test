@@ -6,6 +6,7 @@ from crewai import Crew
 from tasks import Highlights_Tasks
 from agents import Highlights_Agents
 
+
 tasks = Highlights_Tasks()
 agents = Highlights_Agents()
 
@@ -20,8 +21,8 @@ Write_agent = agents.Write_agent()
 
 
 # Create Tasks
-Game_task = tasks.Game_task(Game_agent, game)
-Highlights_task = tasks.Highlights_task(Highlights_Agents, game)
+game_release = tasks.Game_task(Game_agent, game)
+game_highlights = tasks.Highlights_task(Write_agent, game)
 
 
 # Create Crew responsible for Copy
@@ -31,13 +32,13 @@ crew = Crew(
 		Write_agent
 	],
 	tasks=[
-		Game_task,
-		Highlights_task
+		game_release,
+		game_highlights
 	],
 	verbose=True
 )
 
-game = crew.kickoff()
+result = crew.kickoff()
 
 
 # Print results
@@ -45,4 +46,11 @@ print("\n\n########################")
 print("## Here is the result")
 print("########################\n")
 print("Your Highlights:")
-print(game)
+file_path = "output.txt"
+with open(file_path, 'w') as file:
+
+    file.write(result)
+
+print("Output has been written to", file_path)
+
+print(result)
